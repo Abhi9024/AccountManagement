@@ -1,0 +1,110 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+@model AccountManagement.Models.AccountManagement
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+
+
+<br />
+<br />
+<div class="row">
+    <div class="col-sm-2">
+        <label>Search By:</label>
+    </div>
+    <div class="col-sm-6 ui-widget">
+        <label>Account</label>
+        <input type='radio' name='keyType' value='Account' checked="@Model.IsAccount" >
+        <span class="clearfix"></span>
+        <label>Project Name</label>
+        <input type='radio' name='keyType' value='ProjectName'  checked="@Model.IsProjectName">
+        <span class="clearfix"></span>
+        <label>Solution</label>
+        <input type='radio' name='keyType' value='Solution'  checked="@Model.IsTechStack">
+        <span class="clearfix"></span>
+        <label>Primary Technology</label>
+        <input type='radio' name='keyType' value='IndicativePrimaryTechnology' checked="@Model.IsTechStack">
+        <span class="clearfix"></span>
+
+        <input type="text" name="searchKey" id="searchKey"  value="@Model.SearchKey" />
+        
+        <ul id="test"></ul>
+        <input type="button" id="search" value="Search" />
+    </div>
+   
+</div>
+
+<br />
+<br />
+<div id="AccountGrid" class="clearfix">
+    @Html.Partial("~/Views/AccountGrid.cshtml", Model.AccountManagementModel)
+</div>
+<input type="hidden" id="hdnSearchKey" />
+<br />
+<br />
+
+
+
+<div id="accDetails">
+</div>
+
+
+
+
+
+<link href="~/Content/jquery-ui.css" rel="stylesheet" />
+
+
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+<script src="~/Scripts/jquery-ui.js"></script>
+
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("#search").on("click", function () {
+            $("#hdnSearchKey").val($("#searchKey").val());
+            $.ajax({
+                url: "/Home/AccountSearch",
+                type: "GET",
+                data: { searchKey: $("#searchKey").val(), keyType: $("input:radio[name='keyType']:checked").val() }
+            })
+            .success(function(partialViewResult) {
+                $("#AccountGrid").html(partialViewResult);
+            });
+        });
+
+        $(document).on('click','input[name="accDetailbtn"]', function () {
+            $.ajax({
+                url: "/Home/AccountDetails",
+                type: "GET",
+                data: { searchKey: $(this).val() }
+            })
+            .success(function (partialViewResult) {
+                $("#accDetails").html(partialViewResult);
+            });
+        });
+
+        $("#searchKey").autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    url: "/Home/AutoComplete",
+                    type: "POST",
+                    dataType: "json",
+                    data: { searchKey: $("#searchKey").val(), keyType: $("input:radio[name='keyType']:checked").val() },
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            return { label: item, value: item };
+                        }))
+
+                    }
+                })
+            },
+            messages: {
+                noResults: "", results: ""
+            }
+        });
+
+    });
+</script>

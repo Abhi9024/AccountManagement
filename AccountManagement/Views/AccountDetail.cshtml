@@ -1,0 +1,96 @@
+﻿@model AccountManagement.Models.AccountManagementViewModel
+
+<style>
+    .panel-heading {
+      background-color:darkgrey !important;
+    }
+</style>
+
+<h2>Project Details</h2>
+<div class="row">
+    <div class="col-sm-4">
+        <div class="container">
+            <div class="panel panel-default">
+                <div class="panel-heading"><b>Account</b></div>
+                <div class="panel-body">@Model.Account</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="container">
+            <div class="panel panel-default">
+                <div class="panel-heading"><b>Project Name</b></div>
+                <div class="panel-body">@Model.ProjectName</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="container">
+            <div class="panel panel-default">
+                <div class="panel-heading"><b>Measureable business value</b></div>
+                <div class="panel-body">@Model.MeasureableBusinessValue</div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-4">
+        <div class="container">
+            <div class="panel panel-default">
+                <div class="panel-heading"><b>Project (s) Description (What is the Problem?)</b></div>
+                <div class="panel-body">@Model.ProjectDescription</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="container">
+            <div class="panel panel-default">
+                <div class="panel-heading"><b>Solution ( What is the Work or Applications Emids is working on?)</b></div>
+                <div class="panel-body">@Model.Solution</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="container">
+            <div class="panel panel-default">
+                <div class="panel-heading"><b>Tech stack</b></div>
+                <div class="panel-body">@Model.TechStack</div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-4">
+        <div class="container">
+            <div class="panel panel-default">
+                <div class="panel-heading"><b>Practice Area</b></div>
+                <div class="panel-body">@Model.PracticeArea</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="container">
+            <div class="panel panel-default">
+                <div class="panel-heading"><b>Customer ( Product dev / Prod Engg)</b></div>
+                <div class="panel-body">@Model.Customer</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="container">
+            <div class="panel panel-default">
+                <div class="panel-heading"><b>Peak team size</b></div>
+                <div class="panel-body">@Model.PeakTeamSize</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="container">
+            <div class="panel panel-default">
+                <div class="panel-heading">On shore presence (Count)</div>
+                <div class="panel-body">@Model.OnShorePresence</div>
+            </div>
+        </div>
+    </div>
+</div>
+

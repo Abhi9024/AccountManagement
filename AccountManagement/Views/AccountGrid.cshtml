@@ -1,0 +1,49 @@
+﻿
+@model PagedList.IPagedList<AccountManagement.Models.AccountManagementViewModel>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+
+<div class="row">
+    <div class="col-sm-11">
+
+        <table class="table table-striped table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Account</th>
+                    <th scope="col">Project Name</th>
+                    <th scope="col">Solution ( What is the Work or Applications Emids is working on?</th>
+                    <th scope="col">Indicative Primary Technology</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var data in Model)
+                {
+                    <tr>
+                        <td>@data.Account</td>
+                        <td><input type="button" class="btn btn-link" id="accDetailbtn" name="accDetailbtn" value="@data.ProjectName" /></td>
+                        <td>@data.Solution</td>
+                        <td>@data.IndicativePrimaryTechnology</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<br />
+
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page, searchKey = ViewBag.CurrentFilter,keyType = ViewBag.KeyType }))
+
+
+
+
+
+
+
+
+
+
